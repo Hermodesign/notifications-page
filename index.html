@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <title>Frontend Mentor | Notifications page</title>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="ntf-box">
+      <div class="ntf-header">
+        <h1>Notifications</h1><span aria-label="You have 3 unread notifications">3</span>
+      </div>
+      <button href="#" aria-label="Mark all notifications as read" class="btn">Mark all as read</button>
+    </section>
+
+    <ul class="ntf-list">
+      <li class="ntf-item unread">
+        <div class="ntf-avatar"><img src="/assets/images/avatar-mark-webber.webp" alt="Mark Webber" class="img"></div>
+        <div class="ntf-content">
+          <p><span class="ntf-user">Mark Webber</span> reacted to your recent post
+            <span class="ntf-link unread-point">My first tournament today!</span>
+          </p>
+          <span class="ntf-time">1m ago</span>
+        </div>
+        <div class="msg hidden"></div>
+      </li>
+
+      <li class="ntf-item unread">
+        <div class="ntf-avatar"><img src="/assets/images/avatar-angela-gray.webp" alt="Angela Gray" class="img"></div>
+        <div class="ntf-content">
+          <p class="unread-point"><span class="ntf-user">Angela Gray</span> followed you
+          </p>
+          <span class="ntf-time">5m ago</span>
+        </div>
+        <div class="msg hidden"></div>
+      </li>
+
+      <li class="ntf-item unread">
+        <div class="ntf-avatar"><img src="/assets/images\avatar-jacob-thompson.webp" alt="Jacob Thompson" class="img">
+        </div>
+        <div class="ntf-content">
+          <p><span class="ntf-user">Jacob Thompson</span> has joined your group
+            <span class="ntf-link unread-point">Chess Club</span>
+          </p>
+          <span class="ntf-time">1 day ago</span>
+        </div>
+        <div class="msg hidden"></div>
+      </li>
+
+      <li class="ntf-item">
+        <div class="ntf-avatar"><img src="/assets/images/avatar-rizky-hasanuddin.webp" alt="Rizky Hasanuddin"
+            class="img">
+        </div>
+        <div class="ntf-content">
+          <p><span class="ntf-user">Rizky Hasanuddin</span> sent you a private message
+          </p>
+          <span class="ntf-time">5 days ago</span>
+        </div>
+        <div class="msg">Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and
+          I'm already having lots of fun and improving my game.</div>
+      </li>
+
+      <li class="ntf-item ">
+        <div class="ntf-avatar"><img src="/assets/images/avatar-kimberly-smith.webp" alt="Kimberly Smith" class="img">
+        </div>
+        <div class="ntf-content">
+          <img src="/assets/images/image-chess.webp" alt="Chess" class="commented-pic">
+          <p class="comment"><span class="ntf-user">Kimberly Smith</span> commented on your picture</p>
+          <span class="ntf-time">1 week ago</span>
+        </div>
+        <div class="msg hidden"></div>
+      </li>
+
+      <li class="ntf-item ">
+        <div class="ntf-avatar"><img src="/assets/images/avatar-nathan-peterson.webp" alt="Nathan Peterson" class="img">
+        </div>
+        <div class="ntf-content">
+          <p><span class="ntf-user">Nathan Peterson</span> reacted to your recent post
+            <span class="ntf-link">5 end-game strategies to increase your win rate</span>
+          </p>
+          <span class="ntf-time">2 weeks ago</span>
+        </div>
+        <div class="msg hidden"></div>
+      </li>
+
+      <li class="ntf-item ">
+        <div class="ntf-avatar"><img src="/assets/images/avatar-anna-kim.webp" alt="Anna Kim" class="img">
+        </div>
+        <div class="ntf-content">
+          <p><span class="ntf-user">Anna Kim</span> left the group
+            <span class="ntf-link">Chess Club</span>
+          </p>
+          <span class="ntf-time">2 weeks ago</span>
+        </div>
+        <div class="msg hidden"></div>
+      </li>
+    </ul>
+  </main>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+      const notifications = document.querySelectorAll(".ntf-item.unread");
+      const notificationCount = document.querySelector(".ntf-header span");
+      const markAllButton = document.querySelector(".btn");
+
+      function updateNotificationCount() {
+        const unreadNotifications = document.querySelectorAll(".ntf-item.unread").length;
+        notificationCount.textContent = unreadNotifications;
+        if (unreadNotifications === 0) {
+          notificationCount.style.display = "none";
+        } else {
+          notificationCount.style.display = "inline";
+        }
+      }
+
+      notifications.forEach((notification) => {
+        notification.addEventListener("click", function () {
+          this.classList.remove("unread");
+          this.querySelectorAll(".unread-point").forEach((point) => {
+            point.classList.remove("unread-point");
+          });
+          updateNotificationCount();
+        });
+      });
+
+      markAllButton.addEventListener("click", function () {
+        document.querySelectorAll(".ntf-item.unread").forEach((notification) => {
+          notification.classList.remove("unread");
+          notification.querySelectorAll(".unread-point").forEach((point) => {
+            point.classList.remove("unread-point");
+          });
+        });
+        updateNotificationCount();
+      });
+
+      updateNotificationCount();
+    });
+  </script>
+</body>
+
+</html>
